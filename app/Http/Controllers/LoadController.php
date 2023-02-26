@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Elastic\Elasticsearch\ClientBuilder;
+use Illuminate\Support\Str;
 
 class LoadController extends Controller
 {
@@ -24,5 +25,14 @@ class LoadController extends Controller
         $client->index($params);
 
         return Post::all();
+    }
+
+    public function page(string $slug)
+    {
+        return Post::query()
+            ->firstOrCreate(
+                ['title' => $slug],
+                ['content' => Str::random()]
+            );
     }
 }

@@ -1,3 +1,8 @@
+# Requirements
+* Docker
+* Docker-compose 
+* siege
+
 # Example Docker Compose project for Telegraf, InfluxDB and Grafana
 
 This an example project to show the TIG (Telegraf, InfluxDB and Grafana) stack.

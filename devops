@@ -70,6 +70,9 @@ function help() {
   echo "Usage: $0 [task] <args...>" && compgen -A function | grep -v '^_' | cat -n
 }
 
+function stress_test_page() {
+    siege -c $1 -b -r 10 -f url.txt --log=./siege-$1.log
+}
 
 function stress() {
     siege -c 50 http://127.0.0.1/load

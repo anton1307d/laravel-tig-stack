@@ -19,3 +19,4 @@ Route::get('/', function () {
 });
 
 Route::get('/load', [LoadController::class, 'index']);
+Route::get('/load/{slug}', [LoadController::class, 'page']);
