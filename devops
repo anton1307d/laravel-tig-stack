@@ -75,7 +75,7 @@ function stress_test_page() {
 }
 
 function stress() {
-    siege -c 50 http://127.0.0.1/load
+    siege -c 100 http://127.0.0.1/load
 }
 # -----------------
 

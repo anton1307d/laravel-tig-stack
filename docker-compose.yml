@@ -55,21 +55,21 @@ services:
     volumes:
       - redis:/data
 
-  mongodb:
-    image: mongo:latest
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: root
-    ports:
-      - "127.0.0.1:27017:27017/tcp"
-    volumes:
-      - mongodb_data:/data/db
-    networks:
-      - tig
+#  mongodb:
+#    image: mongo:latest
+#    environment:
+#      MONGO_INITDB_ROOT_USERNAME: root
+#      MONGO_INITDB_ROOT_PASSWORD: root
+#    ports:
+#      - "127.0.0.1:27017:27017/tcp"
+#    volumes:
+#      - mongodb_data:/data/db
+#    networks:
+#      - tig
 
   mysql:
     image: mysql:8
-    command: "--performance-schema=OFF --innodb_flush_log_at_trx_commit=2 --innodb_log_buffer_size=4M --innodb_buffer_pool_size=128M"
+    command: "--performance-schema=OFF --skip-innodb_adaptive_hash_index --innodb_flush_log_at_trx_commit=0 --innodb_log_buffer_size=4M --innodb_buffer_pool_size=128M"
     volumes:
       - mysql:/var/lib/mysql:cached
     tmpfs:
@@ -84,73 +84,73 @@ services:
     networks:
       - tig
 
-  elasticsearch:
-    image: elasticsearch:8.6.2
-    environment:
-      - xpack.security.enabled=false
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - discovery.type=single-node
-    ports:
-      - "127.0.0.1:9200:9200/tcp"
-    volumes:
-      - esdata:/usr/share/elasticsearch/data
-    networks:
-      - tig
+#  elasticsearch:
+#    image: elasticsearch:8.6.2
+#    environment:
+#      - xpack.security.enabled=false
+#      - bootstrap.memory_lock=true
+#      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+#      - discovery.type=single-node
+#    ports:
+#      - "127.0.0.1:9200:9200/tcp"
+#    volumes:
+#      - esdata:/usr/share/elasticsearch/data
+#    networks:
+#      - tig
 
 
 # monitoring
-  telegraf:
-    image: telegraf:1.25.2-alpine
-    volumes:
-      - ./.infra/telegraf/etc/telegraf.conf:/etc/telegraf/telegraf.conf:ro
-    depends_on:
-      - influxdb
-    ports:
-      - '127.0.0.1:8125:8125/udp'
-    networks:
-      - tig
-
-  influxdb:
-    image: influxdb:1.8-alpine
-    env_file: ./.infra/configuration.env
-    ports:
-      - '127.0.0.1:8086:8086'
-    volumes:
-      - ./.infra/:/imports
-      - influxdb_data:/var/lib/influxdb
-    networks:
-      - tig
-
-  socket-proxy:
-    image: tecnativa/docker-socket-proxy
-    container_name: socket-proxy
-    restart: always
-    privileged: true
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    ports:
-      - '127.0.0.1:2375:2375'
-    environment:
-      - LOG_LEVEL=debug # debug,info,notice,warning,err,crit,alert,emerg
-      - CONTAINERS=1
-      - INFO=1
-    networks:
-      - tig
-
-  grafana:
-    image: grafana/grafana:8.0.2
-    depends_on:
-      - influxdb
-    env_file: ./.infra/configuration.env
-    ports:
-      - '127.0.0.1:3000:3000'
-    volumes:
-      - grafana_data:/var/lib/grafana
-      - ./.infra/grafana/provisioning/:/etc/grafana/provisioning/
-      - ./.infra/grafana/dashboards/:/var/lib/grafana/dashboards/
-    networks:
-      - tig
+#  telegraf:
+#    image: telegraf:1.25.2-alpine
+#    volumes:
+#      - ./.infra/telegraf/etc/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+#    depends_on:
+#      - influxdb
+#    ports:
+#      - '127.0.0.1:8125:8125/udp'
+#    networks:
+#      - tig
+#
+#  influxdb:
+#    image: influxdb:1.8-alpine
+#    env_file: ./.infra/configuration.env
+#    ports:
+#      - '127.0.0.1:8086:8086'
+#    volumes:
+#      - ./.infra/:/imports
+#      - influxdb_data:/var/lib/influxdb
+#    networks:
+#      - tig
+#
+#  socket-proxy:
+#    image: tecnativa/docker-socket-proxy
+#    container_name: socket-proxy
+#    restart: always
+#    privileged: true
+#    volumes:
+#      - /var/run/docker.sock:/var/run/docker.sock
+#    ports:
+#      - '127.0.0.1:2375:2375'
+#    environment:
+#      - LOG_LEVEL=debug # debug,info,notice,warning,err,crit,alert,emerg
+#      - CONTAINERS=1
+#      - INFO=1
+#    networks:
+#      - tig
+#
+#  grafana:
+#    image: grafana/grafana:8.0.2
+#    depends_on:
+#      - influxdb
+#    env_file: ./.infra/configuration.env
+#    ports:
+#      - '127.0.0.1:3000:3000'
+#    volumes:
+#      - grafana_data:/var/lib/grafana
+#      - ./.infra/grafana/provisioning/:/etc/grafana/provisioning/
+#      - ./.infra/grafana/dashboards/:/var/lib/grafana/dashboards/
+#    networks:
+#      - tig
 
 volumes:
   mysql:
