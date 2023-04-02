@@ -20,7 +20,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends apt-transport-h
 # php and modules, mariadb-client for backups
 RUN curl -s https://packages.sury.org/php/apt.gpg | apt-key add -\
  && echo "deb https://packages.sury.org/php/ buster main" > /etc/apt/sources.list.d/php.list\
- && apt-get update -q && apt-get install -y --no-install-recommends php8.2-{apcu,bcmath,curl,dom,fpm,gd,intl,mbstring,mysql,redis,zip,mongodb}\
+ && apt-get update -q && apt-get install -y --no-install-recommends php8.2-{apcu,bcmath,curl,dom,fpm,gd,intl,mbstring,mysql,redis,zip,mongodb,pgsql}\
  && apt-get install -y mariadb-client \
  && apt-get autoremove -y && rm -rf /var/lib/apt/lists/*
 

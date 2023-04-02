@@ -35,6 +35,19 @@ services:
         - USER_GID=${USER_GID:-1000}
     ports:
       - "127.0.0.1:80:80/tcp"
+    networks:
+        - tig
+
+  nginx:
+      image: nginx:latest
+      ports:
+          - "127.0.0.1:8080:8080"
+      volumes:
+          - ./.infra/nginx-cache.conf:/etc/nginx/nginx.conf
+      depends_on:
+          -   app
+      networks:
+          - tig
 
   scheduler:
     <<: *container
