@@ -14,9 +14,5 @@ use App\Http\Controllers\LoadController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/load', [LoadController::class, 'index']);
+Route::get('/', [LoadController::class, 'index']);
 Route::get('/load/{slug}', [LoadController::class, 'page']);

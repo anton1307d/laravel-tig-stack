@@ -113,57 +113,57 @@ services:
 
 
 # monitoring
-#  telegraf:
-#    image: telegraf:1.25.2-alpine
-#    volumes:
-#      - ./.infra/telegraf/etc/telegraf.conf:/etc/telegraf/telegraf.conf:ro
-#    depends_on:
-#      - influxdb
-#    ports:
-#      - '127.0.0.1:8125:8125/udp'
-#    networks:
-#      - tig
-#
-#  influxdb:
-#    image: influxdb:1.8-alpine
-#    env_file: ./.infra/configuration.env
-#    ports:
-#      - '127.0.0.1:8086:8086'
-#    volumes:
-#      - ./.infra/:/imports
-#      - influxdb_data:/var/lib/influxdb
-#    networks:
-#      - tig
-#
-#  socket-proxy:
-#    image: tecnativa/docker-socket-proxy
-#    container_name: socket-proxy
-#    restart: always
-#    privileged: true
-#    volumes:
-#      - /var/run/docker.sock:/var/run/docker.sock
-#    ports:
-#      - '127.0.0.1:2375:2375'
-#    environment:
-#      - LOG_LEVEL=debug # debug,info,notice,warning,err,crit,alert,emerg
-#      - CONTAINERS=1
-#      - INFO=1
-#    networks:
-#      - tig
-#
-#  grafana:
-#    image: grafana/grafana:8.0.2
-#    depends_on:
-#      - influxdb
-#    env_file: ./.infra/configuration.env
-#    ports:
-#      - '127.0.0.1:3000:3000'
-#    volumes:
-#      - grafana_data:/var/lib/grafana
-#      - ./.infra/grafana/provisioning/:/etc/grafana/provisioning/
-#      - ./.infra/grafana/dashboards/:/var/lib/grafana/dashboards/
-#    networks:
-#      - tig
+  telegraf:
+    image: telegraf:1.25.2-alpine
+    volumes:
+      - ./.infra/telegraf/etc/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+    depends_on:
+      - influxdb
+    ports:
+      - '127.0.0.1:8125:8125/udp'
+    networks:
+      - tig
+
+  influxdb:
+    image: influxdb:1.8-alpine
+    env_file: ./.infra/configuration.env
+    ports:
+      - '127.0.0.1:8086:8086'
+    volumes:
+      - ./.infra/:/imports
+      - influxdb_data:/var/lib/influxdb
+    networks:
+      - tig
+
+  socket-proxy:
+    image: tecnativa/docker-socket-proxy
+    container_name: socket-proxy
+    restart: always
+    privileged: true
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - '127.0.0.1:2375:2375'
+    environment:
+      - LOG_LEVEL=debug # debug,info,notice,warning,err,crit,alert,emerg
+      - CONTAINERS=1
+      - INFO=1
+    networks:
+      - tig
+
+  grafana:
+    image: grafana/grafana:8.0.2
+    depends_on:
+      - influxdb
+    env_file: ./.infra/configuration.env
+    ports:
+      - '127.0.0.1:3000:3000'
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./.infra/grafana/provisioning/:/etc/grafana/provisioning/
+      - ./.infra/grafana/dashboards/:/var/lib/grafana/dashboards/
+    networks:
+      - tig
 
 volumes:
   mysql:
