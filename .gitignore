@@ -17,3 +17,6 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+/.infra/mysql/master/data/
+/.infra/mysql/slave/data/
+/.infra/mysql/slave_2/data/

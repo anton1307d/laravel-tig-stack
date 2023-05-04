@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-
+use App\Models\Post;
 
 class LoadController extends Controller
 {
     public function index()
     {
-        return User::query()->paginate();
+        Post::factory(100)->create();
+
+        return Post::query()->paginate(15);
     }
 }

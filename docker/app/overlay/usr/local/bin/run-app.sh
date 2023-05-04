@@ -4,7 +4,7 @@ set -e
 
 role=${CONTAINER_ROLE:-app}
 env=${APP_ENV:-production}
-dbhost=${DB_HOST:-mysql}
+dbhost=${DB_HOST:-mysql_master}
 dbport=${DB_PORT:-3306}
 automigrate=${AUTOMIGRATE:-false}
 
