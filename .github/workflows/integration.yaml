@@ -11,7 +11,7 @@ env:
 jobs:
   integration:
     name: Setup Docker & Test PHP
-    runs-on: [ubuntu]
+    runs-on: [ubuntu-latest]
     env:
       COMPOSER_AUTH: ${{ secrets.COMPOSER_AUTH }}
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -54,9 +54,6 @@ jobs:
       - name: Docker Login
         run: |
           docker login --username ${{ secrets.DOCKER_HUB_USERNAME }} --password ${{ secrets.DOCKER_HUB_PASSWORD }}
-
-      - run: 'echo "$COMPOSER_AUTH" > ./backend/auth.json'
-        shell: bash
 
       - name: Build stack
         run: |

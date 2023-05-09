@@ -3,7 +3,7 @@ version: "3.8"
 x-container: &container
   image: localhost:5000/antonzubb/virtrex:tmp
   volumes:
-    - ./backend:/var/www/html:cached
+    - ./.:/var/www/html:cached
   depends_on:
     - mysql
     - redis
@@ -39,7 +39,7 @@ services:
     environment:
       <<: *environment
     volumes:
-      - ./backend:/var/www/html:cached
+      - ./.:/var/www/html:cached
       - composer_cache:/var/www/.composer
     depends_on:
       mysql:
