@@ -4,7 +4,9 @@ set -euo pipefail
 
 function install() {
     ENV=${1:-local}
-    cp .env.example .env || true
+        cp docker/overrides/docker-compose.${ENV}.yml  docker-compose.yml || true
+        cp .env.example                        .env       || true
+        cp .env.example                        .env       || true
 
     if [ $ENV == 'local' ]; then
       docker-compose build

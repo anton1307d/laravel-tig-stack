@@ -1,0 +1,20 @@
+CREATE DATABASE IF NOT EXISTS testing;
+CREATE USER 'testing'@'%' IDENTIFIED BY 'secret';
+GRANT ALL ON testing.* TO 'testing'@'%';
+
+CREATE DATABASE IF NOT EXISTS testing_test_1;
+GRANT ALL ON testing_test_1.* TO 'testing'@'%';
+CREATE DATABASE IF NOT EXISTS testing_test_2;
+GRANT ALL ON testing_test_2.* TO 'testing'@'%';
+CREATE DATABASE IF NOT EXISTS testing_test_3;
+GRANT ALL ON testing_test_3.* TO 'testing'@'%';
+CREATE DATABASE IF NOT EXISTS testing_test_4;
+GRANT ALL ON testing_test_4.* TO 'testing'@'%';
+CREATE DATABASE IF NOT EXISTS testing_test_5;
+GRANT ALL ON testing_test_5.* TO 'testing'@'%';
+CREATE DATABASE IF NOT EXISTS testing_test_6;
+GRANT ALL ON testing_test_6.* TO 'testing'@'%';
+CREATE DATABASE IF NOT EXISTS testing_test_7;
+GRANT ALL ON testing_test_7.* TO 'testing'@'%';
+CREATE DATABASE IF NOT EXISTS testing_test_8;
+GRANT ALL ON testing_test_8.* TO 'testing'@'%';
