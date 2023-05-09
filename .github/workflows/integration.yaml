@@ -11,7 +11,7 @@ env:
 jobs:
   integration:
     name: Setup Docker & Test PHP
-    runs-on: [ubuntu]
+    runs-on: [ubuntu-latest]
     env:
       COMPOSER_AUTH: ${{ secrets.COMPOSER_AUTH }}
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
